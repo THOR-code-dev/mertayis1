@@ -1,4 +1,5 @@
 import React from 'react';
+import logoImg from '../assets/logoM.jpg';
 
 export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) {
   return (
@@ -8,7 +9,7 @@ export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) 
           {/* Col 1: Brand & Slogan */}
           <div className="col-lg-4">
             <div className="footer-brand">
-              <img src="/logoM.jpg" alt="MOCD Nextmeasure GmbH" className="footer-logo" />
+              <img src={logoImg} alt="MOCD Nextmeasure GmbH" className="footer-logo" />
               <p className="footer-slogan">
                 <strong>Messen. Montieren. Dokumentieren.</strong><br />
                 Deutschlandweit. Zuverlässig. Digital.

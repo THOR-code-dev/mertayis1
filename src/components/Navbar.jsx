@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, FileText, Menu, X, Phone } from 'lucide-react';
+import logoImg from '../assets/logoM.jpg';
 
 export default function Navbar({ onOpenOffer, onFilterServices }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Navbar({ onOpenOffer, onFilterServices }) {
     <header className="site-header" id="navbar">
       <div className="container header-inner">
         <a href="#home" className="brand-logo" onClick={() => handleNavClick()}>
-          <img src="/logoM.jpg" alt="MOCD Nextmeasure GmbH Logo" className="logo-img" />
+          <img src={logoImg} alt="MOCD Nextmeasure GmbH Logo" className="logo-img" />
           <div className="logo-badge-text">
             <span className="logo-subtext">Messdienstleistungen · Zählertechnik · Rauchwarnmelder</span>
           </div>

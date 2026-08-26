@@ -1,4 +1,5 @@
 import React from 'react';
+import logoImg from '../assets/logoM.jpg';
 
 export default function AboutSection() {
   return (
@@ -8,7 +9,7 @@ export default function AboutSection() {
           <div className="col-lg-5">
             <div className="about-card-visual">
               <div className="about-logo-wrapper">
-                <img src="/logoM.jpg" alt="MOCD Nextmeasure Logo" className="about-logo-img" />
+                <img src={logoImg} alt="MOCD Nextmeasure Logo" className="about-logo-img" />
               </div>
               <div className="about-stats-badge">
                 <strong>Zuverlässig. Digital. Deutschlandweit.</strong>
