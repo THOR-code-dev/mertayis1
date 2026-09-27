@@ -19,6 +19,9 @@ import {
   Clock,
   Sparkles
 } from 'lucide-react';
+import InteractiveRoiCalculator from '../components/InteractiveRoiCalculator';
+import CaseStudiesSection from '../components/CaseStudiesSection';
+import FaqInteractive from '../components/FaqInteractive';
 
 export default function HomePage({ onOpenOffer }) {
   const [units, setUnits] = useState(120);
@@ -456,8 +459,15 @@ export default function HomePage({ onOpenOffer }) {
         </div>
       </section>
 
-      {/* 5. DEUTSCHLANDWEIT TEASER */}
+      {/* 5. INTERACTIVE ROI & SAVINGS CALCULATOR */}
       <section className="section-wrapper bg-white">
+        <div className="container">
+          <InteractiveRoiCalculator onOpenOffer={onOpenOffer} />
+        </div>
+      </section>
+
+      {/* 6. DEUTSCHLANDWEIT TEASER */}
+      <section className="section-wrapper bg-light">
         <div className="container">
           <div className="locations-teaser-box">
             <div className="locations-teaser-text">
@@ -509,7 +519,17 @@ export default function HomePage({ onOpenOffer }) {
         </div>
       </section>
 
-      {/* 6. FAQ TEASER & HIGH CONVERSION BANNER */}
+      {/* 7. REAL B2B CASE STUDIES */}
+      <CaseStudiesSection />
+
+      {/* 8. INTERACTIVE FAQ SECTION */}
+      <section className="section-wrapper bg-white">
+        <div className="container">
+          <FaqInteractive />
+        </div>
+      </section>
+
+      {/* 9. HIGH CONVERSION BANNER */}
       <section className="section-wrapper bg-navy text-white">
         <div className="container">
           <div className="cta-banner-content text-center">

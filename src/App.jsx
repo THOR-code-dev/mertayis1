@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import MobileBottomNav from './components/MobileBottomNav';
 import ScrollToTop from './components/ScrollToTop';
+import Breadcrumbs from './components/Breadcrumbs';
 import OfferModal from './components/OfferModal';
 import LegalModals from './components/LegalModals';
 
@@ -53,6 +54,9 @@ export default function App() {
         {/* Global Header */}
         <TopBar />
         <Navbar onOpenOffer={handleOpenOffer} />
+
+        {/* Global Breadcrumbs for Inner Pages */}
+        <Breadcrumbs />
 
         {/* Page Routes */}
         <main id="mainContent" className="main-viewport">

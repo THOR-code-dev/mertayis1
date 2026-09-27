@@ -12,6 +12,7 @@ import {
   FileCheck2,
   Calendar
 } from 'lucide-react';
+import InteractiveRoiCalculator from '../components/InteractiveRoiCalculator';
 
 export default function HausverwaltungenPage({ onOpenOffer }) {
   return (
@@ -100,6 +101,13 @@ export default function HausverwaltungenPage({ onOpenOffer }) {
               <p>Sie erhalten gebündelte PDF-Prüfberichte und Zählerlisten fertig aufbereitet für Ihre Software.</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ROI & Effizienz-Rechner */}
+      <section className="section-wrapper bg-white">
+        <div className="container">
+          <InteractiveRoiCalculator onOpenOffer={onOpenOffer} />
         </div>
       </section>
 
