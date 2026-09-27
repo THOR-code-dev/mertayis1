@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ServicesSection from './components/ServicesSection';
-import RauchwarnmelderHub from './components/RauchwarnmelderHub';
-import HausverwaltungenSection from './components/HausverwaltungenSection';
-import WohnungsunternehmenSection from './components/WohnungsunternehmenSection';
-import DeutschlandweitSection from './components/DeutschlandweitSection';
-import UspSection from './components/UspSection';
-import AboutSection from './components/AboutSection';
-import OfferSection from './components/OfferSection';
-import FaqSection from './components/FaqSection';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import FloatingActionBar from './components/FloatingActionBar';
+import MobileBottomNav from './components/MobileBottomNav';
+import ScrollToTop from './components/ScrollToTop';
 import OfferModal from './components/OfferModal';
 import LegalModals from './components/LegalModals';
+
+// Pages
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
+import RwmPage from './pages/RwmPage';
+import HausverwaltungenPage from './pages/HausverwaltungenPage';
+import WohnungsunternehmenPage from './pages/WohnungsunternehmenPage';
+import LocationsPage from './pages/LocationsPage';
+import AboutPage from './pages/AboutPage';
+import OfferPage from './pages/OfferPage';
+import ContactPage from './pages/ContactPage';
 
 export default function App() {
   const [offerModalOpen, setOfferModalOpen] = useState(false);
   const [offerModalContext, setOfferModalContext] = useState('');
-  const [servicesFilter, setServicesFilter] = useState('all');
   const [legalModalType, setLegalModalType] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
@@ -39,89 +40,73 @@ export default function App() {
     }
   };
 
-  const handleFilterServices = (cat) => {
-    setServicesFilter(cat);
-    const element = document.getElementById('leistungen');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="app-container">
-      {/* Toast Notification */}
-      <div className={`toast-notification ${toastMessage ? 'show' : ''}`} id="toast">
-        <span className="toast-icon">✓</span>
-        <span className="toast-message">{toastMessage || ''}</span>
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="app-container">
+        {/* Toast Notification */}
+        <div className={`toast-notification ${toastMessage ? 'show' : ''}`} id="toast">
+          <span className="toast-icon">✓</span>
+          <span className="toast-message">{toastMessage || ''}</span>
+        </div>
+
+        {/* Global Header */}
+        <TopBar />
+        <Navbar onOpenOffer={handleOpenOffer} />
+
+        {/* Page Routes */}
+        <main id="mainContent" className="main-viewport">
+          <Routes>
+            <Route path="/" element={<HomePage onOpenOffer={handleOpenOffer} />} />
+            <Route path="/leistungen" element={<ServicesPage onOpenOffer={handleOpenOffer} />} />
+            <Route path="/rauchwarnmelder" element={<RwmPage onOpenOffer={handleOpenOffer} />} />
+            <Route path="/hausverwaltungen" element={<HausverwaltungenPage onOpenOffer={handleOpenOffer} />} />
+            <Route path="/wohnungsunternehmen" element={<WohnungsunternehmenPage onOpenOffer={handleOpenOffer} />} />
+            <Route path="/standorte" element={<LocationsPage onOpenOffer={handleOpenOffer} />} />
+            <Route path="/ueber-uns" element={<AboutPage onOpenOffer={handleOpenOffer} />} />
+            <Route 
+              path="/angebot" 
+              element={
+                <OfferPage 
+                  onShowToast={showToast} 
+                  onOpenLegal={(type) => setLegalModalType(type)} 
+                />
+              } 
+            />
+            <Route 
+              path="/kontakt" 
+              element={
+                <ContactPage 
+                  onShowToast={showToast} 
+                  onOpenOffer={handleOpenOffer} 
+                />
+              } 
+            />
+            {/* Fallback to Home */}
+            <Route path="*" element={<HomePage onOpenOffer={handleOpenOffer} />} />
+          </Routes>
+        </main>
+
+        {/* Global Footer */}
+        <Footer onOpenLegal={(type) => setLegalModalType(type)} />
+
+        {/* Mobile App Bottom Bar */}
+        <MobileBottomNav onOpenOffer={handleOpenOffer} />
+
+        {/* Quick Action Modal */}
+        <OfferModal 
+          isOpen={offerModalOpen} 
+          onClose={() => setOfferModalOpen(false)} 
+          initialContext={offerModalContext}
+          onShowToast={showToast}
+        />
+
+        {/* Impressum & Privacy Modals */}
+        <LegalModals 
+          activeModal={legalModalType} 
+          onClose={() => setLegalModalType(null)} 
+        />
       </div>
-
-      {/* Header & Navigation */}
-      <TopBar />
-      <Navbar 
-        onOpenOffer={handleOpenOffer} 
-        onFilterServices={handleFilterServices} 
-      />
-
-      {/* Main Page Sections */}
-      <main id="mainContent">
-        <Hero onOpenOffer={handleOpenOffer} />
-        
-        <ServicesSection 
-          onOpenOffer={handleOpenOffer} 
-          activeFilter={servicesFilter} 
-        />
-        
-        <RauchwarnmelderHub onOpenOffer={handleOpenOffer} />
-        
-        <HausverwaltungenSection onOpenOffer={handleOpenOffer} />
-        
-        <WohnungsunternehmenSection onOpenOffer={handleOpenOffer} />
-        
-        <DeutschlandweitSection onOpenOffer={handleOpenOffer} />
-        
-        <UspSection />
-        
-        <AboutSection />
-        
-        <OfferSection 
-          onShowToast={showToast} 
-          onOpenLegal={(type) => setLegalModalType(type)} 
-        />
-        
-        <FaqSection />
-        
-        <ContactSection 
-          onShowToast={showToast} 
-          onOpenOffer={handleOpenOffer} 
-        />
-      </main>
-
-      {/* Footer */}
-      <Footer 
-        onFilterServices={handleFilterServices} 
-        onSelectCity={(city) => {
-          const el = document.getElementById('deutschlandweit');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }}
-        onOpenLegal={(type) => setLegalModalType(type)}
-      />
-
-      {/* Floating Action Bar */}
-      <FloatingActionBar onOpenOffer={handleOpenOffer} />
-
-      {/* Offer Popup Modal */}
-      <OfferModal 
-        isOpen={offerModalOpen} 
-        onClose={() => setOfferModalOpen(false)} 
-        initialContext={offerModalContext}
-        onShowToast={showToast}
-      />
-
-      {/* Impressum & Privacy Modals */}
-      <LegalModals 
-        activeModal={legalModalType} 
-        onClose={() => setLegalModalType(null)} 
-      />
-    </div>
+    </BrowserRouter>
   );
 }

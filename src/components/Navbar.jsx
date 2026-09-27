@@ -1,81 +1,140 @@
 import React, { useState } from 'react';
-import { ChevronDown, FileText, Menu, X, Phone } from 'lucide-react';
+import { NavLink, Link } from 'react-router-dom';
+import { ChevronDown, FileText, Menu, X, Phone, MessageSquare } from 'lucide-react';
 import logoImg from '../assets/logoM.jpg';
 
-export default function Navbar({ onOpenOffer, onFilterServices }) {
+export default function Navbar({ onOpenOffer }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleNavClick = (serviceType = null) => {
+  const closeMobile = () => {
     setMobileOpen(false);
-    if (serviceType && onFilterServices) {
-      onFilterServices(serviceType);
-    }
   };
 
   return (
     <header className="site-header" id="navbar">
       <div className="container header-inner">
-        <a href="#home" className="brand-logo" onClick={() => handleNavClick()}>
-          <img src={logoImg} alt="MOCD Nextmeasure GmbH Logo" className="logo-img" />
-          <div className="logo-badge-text">
-            <span className="logo-subtext">Messdienstleistungen · Zählertechnik · Rauchwarnmelder</span>
-          </div>
-        </a>
+        <Link to="/" className="brand-logo" onClick={closeMobile} aria-label="MOCD Nextmeasure Startseite">
+          <img src={logoImg} alt="MOCD Nextmeasure GmbH" className="logo-img" />
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="main-nav">
           <ul className="nav-links">
-            <li><a href="#home" className="nav-link active">Startseite</a></li>
+            <li>
+              <NavLink 
+                to="/" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                end
+              >
+                Startseite
+              </NavLink>
+            </li>
+
             <li className="dropdown-parent">
-              <a href="#leistungen" className="nav-link">
+              <NavLink 
+                to="/leistungen" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
                 Leistungen <ChevronDown size={14} />
-              </a>
+              </NavLink>
               <div className="dropdown-menu">
-                <a href="#leistungen" onClick={() => handleNavClick('wasser')} className="dropdown-item">
+                <Link to="/leistungen" className="dropdown-item">
                   <span className="dot cyan-dot"></span>
                   <div>
                     <strong>Wasserzähler</strong>
-                    <small>Ablesung, Montage, Austausch & Doku</small>
+                    <small>Ablesung, Montage, Turnustausch & Funk</small>
                   </div>
-                </a>
-                <a href="#leistungen" onClick={() => handleNavClick('waerme')} className="dropdown-item">
+                </Link>
+                <Link to="/leistungen" className="dropdown-item">
                   <span className="dot orange-dot"></span>
                   <div>
                     <strong>Wärmezähler / WMZ</strong>
-                    <small>Montage, Eichung, Austausch & Funk</small>
+                    <small>Montage, Eichfristen & Fühler</small>
                   </div>
-                </a>
-                <a href="#leistungen" onClick={() => handleNavClick('heiz')} className="dropdown-item">
+                </Link>
+                <Link to="/leistungen" className="dropdown-item">
                   <span className="dot green-dot"></span>
                   <div>
                     <strong>Heizkostenverteiler</strong>
-                    <small>Elektronisch, Funk & Ablesung</small>
+                    <small>Elektronisch 2-Fühler, Funk & UVI</small>
                   </div>
-                </a>
-                <a href="#leistungen" onClick={() => handleNavClick('mess')} className="dropdown-item">
+                </Link>
+                <Link to="/leistungen" className="dropdown-item">
                   <span className="dot blue-dot"></span>
                   <div>
                     <strong>Messdienstleistungen</strong>
-                    <small>Geräteaufnahme, Nutzerwechsel & Service</small>
+                    <small>Liegenschaftsaufnahme & Service</small>
                   </div>
-                </a>
+                </Link>
               </div>
             </li>
-            <li><a href="#rauchwarnmelder" className="nav-link highlight-pill">🚨 Rauchwarnmelder</a></li>
-            <li><a href="#hausverwaltungen" className="nav-link">Für Hausverwaltungen</a></li>
-            <li><a href="#wohnungsunternehmen" className="nav-link">Für Wohnungsunternehmen</a></li>
-            <li><a href="#deutschlandweit" className="nav-link">Deutschlandweit</a></li>
-            <li><a href="#ueber-uns" className="nav-link">Über uns</a></li>
-            <li><a href="#kontakt" className="nav-link">Kontakt</a></li>
+
+            <li>
+              <NavLink 
+                to="/rauchwarnmelder" 
+                className={({ isActive }) => `nav-link highlight-pill ${isActive ? 'active' : ''}`}
+              >
+                🚨 Rauchwarnmelder
+              </NavLink>
+            </li>
+
+            <li className="dropdown-parent">
+              <span className="nav-link cursor-pointer">
+                Zielgruppen <ChevronDown size={14} />
+              </span>
+              <div className="dropdown-menu">
+                <Link to="/hausverwaltungen" className="dropdown-item">
+                  <span className="dot navy-dot"></span>
+                  <div>
+                    <strong>Für Hausverwaltungen</strong>
+                    <small>WEG- & Mietverwaltungen, Terminservice</small>
+                  </div>
+                </Link>
+                <Link to="/wohnungsunternehmen" className="dropdown-item">
+                  <span className="dot cyan-dot"></span>
+                  <div>
+                    <strong>Für Wohnungsunternehmen</strong>
+                    <small>Großbestände, ERP-Import & Rahmenverträge</small>
+                  </div>
+                </Link>
+              </div>
+            </li>
+
+            <li>
+              <NavLink 
+                to="/standorte" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                Deutschlandweit
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink 
+                to="/ueber-uns" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                Über uns
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink 
+                to="/kontakt" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                Kontakt
+              </NavLink>
+            </li>
           </ul>
         </nav>
 
         {/* Action Button */}
         <div className="header-actions">
-          <button className="btn btn-primary btn-glow" onClick={() => onOpenOffer('Header Button')}>
+          <Link to="/angebot" className="btn btn-primary btn-glow">
             <FileText size={16} />
             <span>ANGEBOT ANFORDERN</span>
-          </button>
+          </Link>
           <button 
             className="mobile-toggle" 
             onClick={() => setMobileOpen(!mobileOpen)} 
@@ -90,19 +149,56 @@ export default function Navbar({ onOpenOffer, onFilterServices }) {
       {mobileOpen && (
         <div className="mobile-menu-drawer open">
           <ul className="mobile-nav-list">
-            <li><a href="#home" onClick={() => handleNavClick()}>Startseite</a></li>
-            <li><a href="#leistungen" onClick={() => handleNavClick()}>Leistungen Übersicht</a></li>
-            <li><a href="#rauchwarnmelder" onClick={() => handleNavClick()}>🚨 Rauchwarnmelder Komplettangebot</a></li>
-            <li><a href="#hausverwaltungen" onClick={() => handleNavClick()}>Für Hausverwaltungen</a></li>
-            <li><a href="#wohnungsunternehmen" onClick={() => handleNavClick()}>Für Wohnungsunternehmen</a></li>
-            <li><a href="#deutschlandweit" onClick={() => handleNavClick()}>Deutschlandweiter Service & Städte</a></li>
-            <li><a href="#ueber-uns" onClick={() => handleNavClick()}>Über MOCD Nextmeasure</a></li>
-            <li><a href="#kontakt" onClick={() => handleNavClick()}>Kontakt & Anfahrt</a></li>
+            <li>
+              <NavLink to="/" onClick={closeMobile} end>
+                🏠 Startseite
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/leistungen" onClick={closeMobile}>
+                ⚙️ Leistungen Übersicht
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/rauchwarnmelder" onClick={closeMobile} className="text-red-highlight">
+                🚨 Rauchwarnmelder Hub
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/hausverwaltungen" onClick={closeMobile}>
+                🏢 Für Hausverwaltungen
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/wohnungsunternehmen" onClick={closeMobile}>
+                🏙️ Für Wohnungsunternehmen
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/standorte" onClick={closeMobile}>
+                📍 Deutschlandweit & Städte
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/ueber-uns" onClick={closeMobile}>
+                ℹ️ Über MOCD Nextmeasure
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/kontakt" onClick={closeMobile}>
+                📞 Kontakt & Anfahrt
+              </NavLink>
+            </li>
           </ul>
+
           <div className="mobile-drawer-cta">
-            <button className="btn btn-primary btn-block" onClick={() => { setMobileOpen(false); onOpenOffer('Mobile Drawer'); }}>
+            <Link 
+              to="/angebot" 
+              className="btn btn-primary btn-block" 
+              onClick={closeMobile}
+            >
               JETZT ANGEBOT ANFORDERN
-            </button>
+            </Link>
             <div className="mobile-quick-contacts">
               <a href="tel:+4920212345678" className="mobile-call-btn">
                 📞 Jetzt Anrufen
@@ -113,7 +209,7 @@ export default function Navbar({ onOpenOffer, onFilterServices }) {
                 rel="noreferrer" 
                 className="mobile-whatsapp-btn"
               >
-                💬 WhatsApp B2B
+                💬 WhatsApp
               </a>
             </div>
           </div>

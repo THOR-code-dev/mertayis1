@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logoImg from '../assets/logoM.jpg';
 
-export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) {
+export default function Footer({ onOpenLegal }) {
   return (
     <footer className="site-footer">
       <div className="container footer-top">
@@ -9,7 +10,9 @@ export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) 
           {/* Col 1: Brand & Slogan */}
           <div className="col-lg-4">
             <div className="footer-brand">
-              <img src={logoImg} alt="MOCD Nextmeasure GmbH" className="footer-logo" />
+              <Link to="/">
+                <img src={logoImg} alt="MOCD Nextmeasure GmbH" className="footer-logo" />
+              </Link>
               <p className="footer-slogan">
                 <strong>Messen. Montieren. Dokumentieren.</strong><br />
                 Deutschlandweit. Zuverlässig. Digital.
@@ -24,12 +27,12 @@ export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) 
           <div className="col-lg-3 col-md-6">
             <h4 className="footer-heading">Leistungen</h4>
             <ul className="footer-links">
-              <li><a href="#leistungen" onClick={() => onFilterServices('wasser')}>Wasserzähler Montage & Tausch</a></li>
-              <li><a href="#leistungen" onClick={() => onFilterServices('waerme')}>Wärmezähler / WMZ Service</a></li>
-              <li><a href="#leistungen" onClick={() => onFilterServices('heiz')}>Heizkostenverteiler (Funk)</a></li>
-              <li><a href="#rauchwarnmelder">Rauchwarnmelder Komplettpaket</a></li>
-              <li><a href="#leistungen" onClick={() => onFilterServices('mess')}>Messdienst & Geräteaufnahme</a></li>
-              <li><a href="#leistungen">Nutzerwechsel & Ablesung</a></li>
+              <li><Link to="/leistungen">Wasserzähler Montage & Tausch</Link></li>
+              <li><Link to="/leistungen">Wärmezähler / WMZ Service</Link></li>
+              <li><Link to="/leistungen">Heizkostenverteiler (Funk)</Link></li>
+              <li><Link to="/rauchwarnmelder">Rauchwarnmelder Komplettpaket</Link></li>
+              <li><Link to="/leistungen">Messdienst & Geräteaufnahme</Link></li>
+              <li><Link to="/angebot">Individuelles B2B Angebot</Link></li>
             </ul>
           </div>
 
@@ -37,11 +40,12 @@ export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) 
           <div className="col-lg-2 col-md-6">
             <h4 className="footer-heading">Zielgruppen</h4>
             <ul className="footer-links">
-              <li><a href="#hausverwaltungen">Für Hausverwaltungen</a></li>
-              <li><a href="#wohnungsunternehmen">Für Wohnungsunternehmen</a></li>
-              <li><a href="#wohnungsunternehmen">Immobilienfonds</a></li>
-              <li><a href="#rauchwarnmelder">Gewerbeimmobilien</a></li>
-              <li><a href="#deutschlandweit">Deutschlandweiter Service</a></li>
+              <li><Link to="/hausverwaltungen">Für Hausverwaltungen</Link></li>
+              <li><Link to="/wohnungsunternehmen">Für Wohnungsunternehmen</Link></li>
+              <li><Link to="/wohnungsunternehmen">Immobilienfonds</Link></li>
+              <li><Link to="/rauchwarnmelder">Gewerbeimmobilien</Link></li>
+              <li><Link to="/standorte">Deutschlandweiter Service</Link></li>
+              <li><Link to="/ueber-uns">Über unser Team</Link></li>
             </ul>
           </div>
 
@@ -50,13 +54,12 @@ export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) 
             <h4 className="footer-heading">Städte & Regionen</h4>
             <div className="footer-city-tags">
               {['Köln', 'Düsseldorf', 'Dortmund', 'Essen', 'Wuppertal', 'Frankfurt', 'Stuttgart', 'München', 'Berlin', 'Hamburg'].map(city => (
-                <a 
+                <Link 
                   key={city} 
-                  href="#deutschlandweit" 
-                  onClick={() => onSelectCity && onSelectCity(city)}
+                  to="/standorte"
                 >
                   {city}
-                </a>
+                </Link>
               ))}
             </div>
             <div className="footer-badge-box">
@@ -73,9 +76,9 @@ export default function Footer({ onFilterServices, onSelectCity, onOpenLegal }) 
             &copy; {new Date().getFullYear()} MOCD Nextmeasure GmbH. Alle Rechte vorbehalten.
           </p>
           <div className="legal-links">
-            <a href="#impressum" onClick={(e) => { e.preventDefault(); onOpenLegal('impressum'); }}>Impressum</a>
-            <a href="#datenschutz" onClick={(e) => { e.preventDefault(); onOpenLegal('datenschutz'); }}>Datenschutzerklärung</a>
-            <a href="#agb" onClick={(e) => { e.preventDefault(); onOpenLegal('agb'); }}>AGB (B2B)</a>
+            <button type="button" className="btn-legal-link" onClick={() => onOpenLegal('impressum')}>Impressum</button>
+            <button type="button" className="btn-legal-link" onClick={() => onOpenLegal('datenschutz')}>Datenschutzerklärung</button>
+            <button type="button" className="btn-legal-link" onClick={() => onOpenLegal('agb')}>AGB (B2B)</button>
           </div>
         </div>
       </div>
