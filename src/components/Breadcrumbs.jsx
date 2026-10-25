@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 
 const routeNames = {
-  '/': 'Startseite',
   '/leistungen': 'Leistungen & Zählertechnik',
   '/rauchwarnmelder': 'Rauchwarnmelder Hub (DIN 14676)',
   '/hausverwaltungen': 'Für Hausverwaltungen',
@@ -16,11 +15,21 @@ const routeNames = {
 
 export default function Breadcrumbs() {
   const location = useLocation();
-  const currentPath = location.pathname;
+  const rawPath = location.pathname.toLowerCase().replace(/\/+$/, '');
 
-  if (currentPath === '/') return null;
+  // Hide on homepage or root paths
+  if (!rawPath || rawPath === '' || rawPath === '/' || rawPath.endsWith('/mertayis1')) {
+    return null;
+  }
 
-  const currentName = routeNames[currentPath] || 'Seite';
+  // Match corresponding route
+  const matchedKey = Object.keys(routeNames).find(key => rawPath === key || rawPath.endsWith(key));
+
+  if (!matchedKey) {
+    return null;
+  }
+
+  const currentName = routeNames[matchedKey];
 
   return (
     <nav className="breadcrumbs-nav" aria-label="Breadcrumb">
