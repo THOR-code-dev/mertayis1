@@ -120,6 +120,15 @@ export default function Navbar({ onOpenOffer }) {
 
             <li>
               <NavLink 
+                to="/karriere" 
+                className={({ isActive }) => `nav-link nav-career-link ${isActive ? 'active' : ''}`}
+              >
+                Karriere <span className="nav-career-badge">Jobs</span>
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink 
                 to="/kontakt" 
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
               >
@@ -182,6 +191,11 @@ export default function Navbar({ onOpenOffer }) {
             <li>
               <NavLink to="/ueber-uns" onClick={closeMobile}>
                 ℹ️ Über MOCD Nextmeasure
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/karriere" onClick={closeMobile} className="text-career-highlight">
+                💼 Karriere & Jobs <span className="mobile-badge-new">Wir stellen ein</span>
               </NavLink>
             </li>
             <li>

@@ -17,7 +17,9 @@ import {
   Home, 
   HelpCircle,
   Clock,
-  Sparkles
+  Sparkles,
+  Briefcase,
+  Truck
 } from 'lucide-react';
 import InteractiveRoiCalculator from '../components/InteractiveRoiCalculator';
 import CaseStudiesSection from '../components/CaseStudiesSection';
@@ -522,10 +524,52 @@ export default function HomePage({ onOpenOffer }) {
       {/* 7. REAL B2B CASE STUDIES */}
       <CaseStudiesSection />
 
-      {/* 8. INTERACTIVE FAQ SECTION */}
-      <section className="section-wrapper bg-white">
+      {/* 8.5. CAREER TEASER SECTION */}
+      <section className="section-wrapper career-teaser-section">
         <div className="container">
-          <FaqInteractive />
+          <div className="career-teaser-card">
+            <div className="career-teaser-header">
+              <span className="badge-pill-orange">
+                <Briefcase size={14} /> WIR STELLEN EIN • DEUTSCHLANDWEIT
+              </span>
+              <h2 className="career-teaser-title">
+                Starten Sie Ihre Karriere bei MOCD Nextmeasure
+              </h2>
+              <p className="career-teaser-subtitle">
+                Überdurchschnittliche Bezahlung, moderner Firmenwagen mit Hilti-Werkzeug, geregelte Arbeitszeiten (kein Notdienst) und 30 Tage Urlaub. Werden Sie Teil unseres wachsenden Teams!
+              </p>
+            </div>
+
+            <div className="career-teaser-grid">
+              <div className="career-teaser-item">
+                <span className="teaser-item-badge">Vollzeit • Dringend</span>
+                <h4>🔧 Servicetechniker Zählertechnik (m/w/d)</h4>
+                <p>Wasser- und Wärmezähler, Funk-HKV Montage. Modernes Servicefahrzeug & iPad.</p>
+                <span className="teaser-salary">3.400 € – 4.600 € + Spesen</span>
+              </div>
+
+              <div className="career-teaser-item">
+                <span className="teaser-item-badge">Sofortstart</span>
+                <h4>🚨 Fachkraft Rauchwarnmelder DIN 14676 (m/w/d)</h4>
+                <p>Montage & jährliche Prüfung. 100% Schulungsfinanzierung auch für Quereinsteiger.</p>
+                <span className="teaser-salary">2.900 € – 3.800 € + Boni</span>
+              </div>
+
+              <div className="career-teaser-item">
+                <span className="teaser-item-badge">Zentrale Wuppertal</span>
+                <h4>📊 Disponent & Einsatzplaner Außendienst (m/w/d)</h4>
+                <p>Digitale Tourenplanung und Koordination bundesweiter Montageteams.</p>
+                <span className="teaser-salary">3.300 € – 4.400 € / Monat</span>
+              </div>
+            </div>
+
+            <div className="career-teaser-footer">
+              <Link to="/karriere" className="btn btn-primary btn-lg btn-glow">
+                <span>Alle offenen Stellen & 90-Sekunden-Bewerbung</span>
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

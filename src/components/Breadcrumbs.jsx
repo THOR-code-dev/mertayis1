@@ -10,7 +10,8 @@ const routeNames = {
   '/standorte': 'Deutschlandweite Standorte',
   '/ueber-uns': 'Über MOCD Nextmeasure',
   '/angebot': 'B2B Angebotsrechner',
-  '/kontakt': 'Kontakt & Zentrale'
+  '/kontakt': 'Kontakt & Zentrale',
+  '/karriere': 'Karriere & Jobs'
 };
 
 export default function Breadcrumbs() {

@@ -19,6 +19,7 @@ import LocationsPage from './pages/LocationsPage';
 import AboutPage from './pages/AboutPage';
 import OfferPage from './pages/OfferPage';
 import ContactPage from './pages/ContactPage';
+import KarrierePage from './pages/KarrierePage';
 
 export default function App() {
   const [offerModalOpen, setOfferModalOpen] = useState(false);
@@ -85,6 +86,10 @@ export default function App() {
                   onOpenOffer={handleOpenOffer} 
                 />
               } 
+            />
+            <Route 
+              path="/karriere" 
+              element={<KarrierePage onShowToast={showToast} />} 
             />
             {/* Fallback to Home */}
             <Route path="*" element={<HomePage onOpenOffer={handleOpenOffer} />} />

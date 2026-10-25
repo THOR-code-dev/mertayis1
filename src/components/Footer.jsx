@@ -46,6 +46,7 @@ export default function Footer({ onOpenLegal }) {
               <li><Link to="/rauchwarnmelder">Gewerbeimmobilien</Link></li>
               <li><Link to="/standorte">Deutschlandweiter Service</Link></li>
               <li><Link to="/ueber-uns">Über unser Team</Link></li>
+              <li><Link to="/karriere" className="footer-career-highlight">💼 Karriere (Wir stellen ein!)</Link></li>
             </ul>
           </div>
 
